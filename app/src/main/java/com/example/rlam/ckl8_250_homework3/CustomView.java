@@ -6,6 +6,8 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 
 /**
@@ -13,12 +15,12 @@ import android.view.View;
  *
  * This sample app demos how to create a custom View with some attributes defined in xml
  */
-public class CustomView extends View {
+public class CustomView extends View  {
 
     private int circleColor;
     private Paint mCirclePaint;                         // Paint for drawing
     private Point mCenter;                              // Center of the Custom View
-    private final static float mRadius = 100;            // Radius for the circle
+    private final static float mRadius = 50;            // Radius for the circle
 
     public CustomView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -39,6 +41,7 @@ public class CustomView extends View {
         // Set the paint color
         mCirclePaint.setColor(circleColor);
     }
+    
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -46,11 +49,31 @@ public class CustomView extends View {
 
         // If there is a size change
         if ((w!=oldw) || (h!=oldh)) {
-            // Set center point x to be half of View width
-            mCenter.x = 100;
-            // Set center point y to be half of the View height
-            mCenter.y = 100;
+            // Set center point x to  uppper left corner
+            mCenter.x = (int) mRadius;
+            // Set center point y to be h uppper left corner
+            mCenter.y = (int) mRadius;
         }
+    }
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        float x = event.getX();
+        float y = event.getY();
+
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                return true;
+            case MotionEvent.ACTION_MOVE:
+                break;
+            case MotionEvent.ACTION_UP:
+                mCenter.x = (int) x;
+                mCenter.y =(int) y;
+                this.invalidate();
+                break;
+            default:
+                return false;
+        }
+        return true;
     }
 
     @Override

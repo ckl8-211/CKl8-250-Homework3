@@ -10,16 +10,22 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
-    <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_weight="1" />-->
 
     <com.example.rlam.ckl8_250_homework3.CustomView
+        android:id="@+id/imageViewFrom"
+        android:scaleType="center"
+        android:layout_weight="1.0"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="5"
+        android:layout_height="50dp"
         custom:circleColor="@color/material_deep_teal_200"/>
+
+    <!--<com.example.rlam.ckl8_250_homework3.CustomView-->
+        <!--android:id="@+id/imageViewTo"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:scaleType="center"-->
+        <!--android:layout_weight="50.0"-->
+        <!--android:layout_width="match_parent"-->
+        <!--custom:circleColor="@color/material_deep_teal_200"/>-->
 
 </LinearLayout>
 <!-- From: file:/Users/rlam/CKL8-250-Homework3/app/src/main/res/layout/activity_main.xml -->
