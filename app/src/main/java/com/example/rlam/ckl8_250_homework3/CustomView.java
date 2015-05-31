@@ -7,15 +7,18 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 /**
  * Created by Margaret on 5/4/15.
  *
  * This sample app demos how to create a custom View with some attributes defined in xml
  */
-public class CustomView extends View  {
+public class CustomView extends View {
+    GestureDetector gestureDetector;
 
     private int circleColor;
     private Paint mCirclePaint;                         // Paint for drawing
@@ -24,10 +27,9 @@ public class CustomView extends View  {
 
     public CustomView(Context context, AttributeSet attrs) {
         super(context, attrs);
-
+        gestureDetector = new GestureDetector(context, new GestureListener());
         mCirclePaint = new Paint();
         mCirclePaint.setStyle(Paint.Style.FILL);
-//        mCirclePaint.setColor(Color.BLUE);
         mCenter = new Point();
 
         if(attrs!=null) {
@@ -41,7 +43,24 @@ public class CustomView extends View  {
         // Set the paint color
         mCirclePaint.setColor(circleColor);
     }
-    
+
+    private class GestureListener extends GestureDetector.SimpleOnGestureListener {
+
+        @Override
+        public boolean onDown(MotionEvent e) {
+            return true;
+        }
+        // event when double tap occurs
+        @Override
+        public boolean onDoubleTap(MotionEvent e) {
+            // Set center point x to  uppper left corner
+            mCenter.x = (int) mRadius;
+            // Set center point y to be h uppper left corner
+            mCenter.y = (int) mRadius;
+            invalidate();
+            return true;
+        }
+    }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -57,6 +76,7 @@ public class CustomView extends View  {
     }
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        gestureDetector.onTouchEvent(event);
         float x = event.getX();
         float y = event.getY();
 
@@ -64,11 +84,11 @@ public class CustomView extends View  {
             case MotionEvent.ACTION_DOWN:
                 return true;
             case MotionEvent.ACTION_MOVE:
-                break;
-            case MotionEvent.ACTION_UP:
                 mCenter.x = (int) x;
                 mCenter.y =(int) y;
                 this.invalidate();
+                break;
+            case MotionEvent.ACTION_UP:
                 break;
             default:
                 return false;

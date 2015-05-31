@@ -1543,6 +1543,7 @@ containing a value of this type.
         public static final int contentPanel=0x7f0c0031;
         public static final int custom=0x7f0c0035;
         public static final int customPanel=0x7f0c0034;
+        public static final int customViewFrom=0x7f0c004f;
         public static final int decor_content_parent=0x7f0c003e;
         public static final int default_activity_button=0x7f0c0029;
         public static final int dialog=0x7f0c001b;
@@ -1557,7 +1558,6 @@ containing a value of this type.
         public static final int icon=0x7f0c002b;
         public static final int ifRoom=0x7f0c0018;
         public static final int image=0x7f0c0028;
-        public static final int imageViewFrom=0x7f0c004f;
         public static final int listMode=0x7f0c0009;
         public static final int list_item=0x7f0c002a;
         public static final int middle=0x7f0c0015;
